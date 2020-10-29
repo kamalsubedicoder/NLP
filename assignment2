@@ -1,0 +1,280 @@
+#Task 1 - Lexicons
+#1. Stopwords:
+from nltk.corpus import stopwords
+stopwords.words('english')
+
+Out[1]:
+['i',
+ 'me',
+ 'my',
+ 'myself',
+ 'we',
+ 'our',
+ 'ours',
+ 'ourselves',
+ 'you',
+ "you're",
+ "you've",
+ "you'll",
+ "you'd",
+ 'your',
+ 'yours',
+ 'yourself',
+ 'yourselves',
+ 'he',
+ 'him',
+ 'his',
+ 'himself',
+ 'she',
+ "she's",
+ 'her',
+ 'hers',
+ 'herself',
+ 'it',
+ "it's",
+ 'its',
+ 'itself',
+ 'they',
+ 'them',
+ 'their',
+ 'theirs',
+ 'themselves',
+ 'what',
+ 'which',
+ 'who',
+ 'whom',
+ 'this',
+ 'that',
+ "that'll",
+ 'these',
+ 'those',
+ 'am',
+ 'is',
+ 'are',
+ 'was',
+ 'were',
+ 'be',
+ 'been',
+ 'being',
+ 'have',
+ 'has',
+ 'had',
+ 'having',
+ 'do',
+ 'does',
+ 'did',
+ 'doing',
+ 'a',
+ 'an',
+ 'the',
+ 'and',
+ 'but',
+ 'if',
+ 'or',
+ 'because',
+ 'as',
+ 'until',
+ 'while',
+ 'of',
+ 'at',
+ 'by',
+ 'for',
+ 'with',
+ 'about',
+ 'against',
+ 'between',
+ 'into',
+ 'through',
+ 'during',
+ 'before',
+ 'after',
+ 'above',
+ 'below',
+ 'to',
+ 'from',
+ 'up',
+ 'down',
+ 'in',
+ 'out',
+ 'on',
+ 'off',
+ 'over',
+ 'under',
+ 'again',
+ 'further',
+ 'then',
+ 'once',
+ 'here',
+ 'there',
+ 'when',
+ 'where',
+ 'why',
+ 'how',
+ 'all',
+ 'any',
+ 'both',
+ 'each',
+ 'few',
+ 'more',
+ 'most',
+ 'other',
+ 'some',
+ 'such',
+ 'no',
+ 'nor',
+ 'not',
+ 'only',
+ 'own',
+ 'same',
+ 'so',
+ 'than',
+ 'too',
+ 'very',
+ 's',
+ 't',
+ 'can',
+ 'will',
+ 'just',
+ 'don',
+ "don't",
+ 'should',
+ "should've",
+ 'now',
+ 'd',
+ 'll',
+ 'm',
+ 'o',
+ 're',
+ 've',
+ 'y',
+ 'ain',
+ 'aren',
+ "aren't",
+ 'couldn',
+ "couldn't",
+ 'didn',
+ "didn't",
+ 'doesn',
+ "doesn't",
+ 'hadn',
+ "hadn't",
+ 'hasn',
+ "hasn't",
+ 'haven',
+ "haven't",
+ 'isn',
+  "isn't",
+ 'ma',
+ 'mightn',
+ "mightn't",
+ 'mustn',
+ "mustn't",
+ 'needn',
+ "needn't",
+ 'shan',
+ "shan't",
+ 'shouldn',
+ "shouldn't",
+ 'wasn',
+ "wasn't",
+ 'weren',
+ "weren't",
+ 'won',
+ "won't",
+ 'wouldn',
+ "wouldn't"]
+ 
+ wn.synsets('good')
+Out[9]:
+[Synset('good.n.01'),
+ Synset('good.n.02'),
+ Synset('good.n.03'),
+ Synset('commodity.n.01'),
+ Synset('good.a.01'),
+ Synset('full.s.06'),
+ Synset('good.a.03'),
+ Synset('estimable.s.02'),
+ Synset('beneficial.s.01'),
+ Synset('good.s.06'),
+ Synset('good.s.07'),
+ Synset('adept.s.01'),
+ Synset('good.s.09'),
+ Synset('dear.s.02'),
+ Synset('dependable.s.04'),
+ Synset('good.s.12'),
+ Synset('good.s.13'),
+ Synset('effective.s.04'),
+ Synset('good.s.15'),
+ Synset('good.s.16'),
+ Synset('good.s.17'),
+ Synset('good.s.18'),
+ Synset('good.s.19'),
+ Synset('good.s.20'),
+ Synset('good.s.21'),
+ Synset('well.r.01'),
+ Synset('thoroughly.r.02')]
+ 
+ wn.synset('dependable.s.04').lemma_names()
+Out[11]:
+['dependable', 'good', 'safe', 'secure']
+
+#Task 2: STEMMING
+import nltk
+from nltk.stem import PorterStemmer
+stemmerporter=PorterStemmer()
+stemmerporter.stem('happiness')
+Out[12]:
+'happi'
+
+import nltk
+from nltk.stem import LancasterStemmer
+stemmerlan=LancasterStemmer()
+stemmerlan.stem('happiness')
+Out[15]:
+'happy'
+
+#Regexp
+from nltk.stem import RegexpStemmer
+stemmerregexp=RegexpStemmer('ing')
+stemmerregexp.stem('singing')
+Out[17]:
+'s'
+
+
+import nltk
+from nltk.stem import SnowballStemmer
+SnowballStemmer.languages
+frenchstemmer=SnowballStemmer('french')
+frenchstemmer.stem('manges')
+Out[18]:
+'mang'
+
+from nltk.stem import PorterStemmer
+stemmer=PorterStemmer()
+texteg="He loves programming but he often asks me - is programming and coding same?"
+texteg=[stemmer.stem(token) for token in texteg.split(" ")]
+print(" ".join(texteg))
+He love program but he often ask me - is program and code same?
+
+
+import nltk
+entries=nltk.corpus.cmudict.entries()
+len(entries)
+
+Out[2]:
+133737
+
+print(entries[:50])
+
+[('a', ['AH0']), ('a.', ['EY1']), ('a', ['EY1']), ('a42128', ['EY1', 'F', 'AO1', 'R', 'T', 'UW1', 'W', 'AH1', 'N', 'T', 'UW1', 'EY1', 'T']), ('aaa', ['T', 'R', 'IH2', 'P', 'AH0', 'L', 'EY1']), ('aaberg', ['AA1', 'B', 'ER0', 'G']), ('aachen', ['AA1', 'K', 'AH0', 'N']), ('aachener', ['AA1', 'K', 'AH0', 'N', 'ER0']), ('aaker', ['AA1', 'K', 'ER0']), ('aalseth', ['AA1', 'L', 'S', 'EH0', 'TH']), ('aamodt', ['AA1', 'M', 'AH0', 'T']), ('aancor', ['AA1', 'N', 'K', 'AO2', 'R']), ('aardema', ['AA0', 'R', 'D', 'EH1', 'M', 'AH0']), ('aardvark', ['AA1', 'R', 'D', 'V', 'AA2', 'R', 'K']), ('aaron', ['EH1', 'R', 'AH0', 'N']), ("aaron's", ['EH1', 'R', 'AH0', 'N', 'Z']), ('aarons', ['EH1', 'R', 'AH0', 'N', 'Z']), ('aaronson', ['EH1', 'R', 'AH0', 'N', 'S', 'AH0', 'N']), ('aaronson', ['AA1', 'R', 'AH0', 'N', 'S', 'AH0', 'N']), ("aaronson's", ['EH1', 'R', 'AH0', 'N', 'S', 'AH0', 'N', 'Z']), ("aaronson's", ['AA1', 'R', 'AH0', 'N', 'S', 'AH0', 'N', 'Z']), ('aarti', ['AA1', 'R', 'T', 'IY2']), ('aase', ['AA1', 'S']), ('aasen', ['AA1', 'S', 'AH0', 'N']), ('ab', ['AE1', 'B']), ('ab', ['EY1', 'B', 'IY1']), ('ababa', ['AH0', 'B', 'AA1', 'B', 'AH0']), ('ababa', ['AA1', 'B', 'AH0', 'B', 'AH0']), ('abacha', ['AE1', 'B', 'AH0', 'K', 'AH0']), ('aback', ['AH0', 'B', 'AE1', 'K']), ('abaco', ['AE1', 'B', 'AH0', 'K', 'OW2']), ('abacus', ['AE1', 'B', 'AH0', 'K', 'AH0', 'S']), ('abad', ['AH0', 'B', 'AA1', 'D']), ('abadaka', ['AH0', 'B', 'AE1', 'D', 'AH0', 'K', 'AH0']), ('abadi', ['AH0', 'B', 'AE1', 'D', 'IY0']), ('abadie', ['AH0', 'B', 'AE1', 'D', 'IY0']), ('abair', ['AH0', 'B', 'EH1', 'R']), ('abalkin', ['AH0', 'B', 'AA1', 'L', 'K', 'IH0', 'N']), ('abalone', ['AE2', 'B', 'AH0', 'L', 'OW1', 'N', 'IY0']), ('abalos', ['AA0', 'B', 'AA1', 'L', 'OW0', 'Z']), ('abandon', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N']), ('abandoned', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N', 'D']), ('abandoning', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N', 'IH0', 'NG']), ('abandonment', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N', 'M', 'AH0', 'N', 'T']), ('abandonments', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N', 'M', 'AH0', 'N', 'T', 'S']), ('abandons', ['AH0', 'B', 'AE1', 'N', 'D', 'AH0', 'N', 'Z']), ('abanto', ['AH0', 'B', 'AE1', 'N', 'T', 'OW0']), ('abarca', ['AH0', 'B', 'AA1', 'R', 'K', 'AH0']), ('abare', ['AA0', 'B', 'AA1', 'R', 'IY0']), ('abascal', ['AE1', 'B', 'AH0', 'S', 'K', 'AH0', 'L'])]
+#3 Wordnet
+from nltk.corpus import wordnet as wn
+wn.synsets('motorcar')
+
+Out[6]:
+[Synset('car.n.01')]
+
+wn.synset('car.n.01').lemma_names()
+Out[8]:
+['car', 'auto', 'automobile', 'machine', 'motorcar']
+

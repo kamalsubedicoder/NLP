@@ -1,0 +1,531 @@
+Scraping
+
+import nltk
+from urllib import request 
+global url
+global confidence
+url = []
+confidence = []
+
+
+url1 = "http://www.natgeotraveller.in/six-years-and-counting/"
+html1 = request.urlopen(url1).read().decode('utf8')
+#print(html1)
+url.append(url1)
+confidence.append(0.0)
+
+url2 = "http://www.natgeotraveller.in/train-to-nowhere/"
+html2 = request.urlopen(url2).read().decode('utf8')
+#print(html2)
+url.append(url2)
+confidence.append(0.0)
+
+url3 = "http://www.natgeotraveller.in/what-dreams-may-come/"
+html3 = request.urlopen(url3).read().decode('utf8')
+#print(html3)
+url.append(url3)
+confidence.append(0.0)
+
+url4 = "http://www.natgeotraveller.in/getting-saucy-about-food/"
+html4 = request.urlopen(url4).read().decode('utf8')
+#print(html4)
+url.append(url4)
+confidence.append(0.0)
+
+
+Tokenization
+
+from nltk.tokenize import word_tokenize
+from bs4 import BeautifulSoup
+raw1 = BeautifulSoup(html1, 'html.parser').get_text()
+tokens1 = word_tokenize(raw1)
+print(len(tokens1))
+#print(tokens1)
+
+3885
+
+raw2 = BeautifulSoup(html2, 'html.parser').get_text()
+tokens2 = word_tokenize(raw2)
+print(len(tokens2))
+#print(tokens2)
+
+3893
+
+raw3 = BeautifulSoup(html3, 'html.parser').get_text()
+tokens3 = word_tokenize(raw3)
+print(len(tokens3))
+#print(tokens3)
+
+3831
+
+raw4 = BeautifulSoup(html4, 'html.parser').get_text()
+tokens4 = word_tokenize(raw4)
+print(len(tokens4))
+#print(tokens4)
+
+3929
+
+
+Remove Stopwords
+
+from nltk.corpus import stopwords
+stop_words=set(stopwords.words("english"))
+filtered_words1=[]
+for w in tokens1:
+    if w not in stop_words:
+        filtered_words1.append(w)
+#print(filtered_words1)
+
+from nltk.corpus import stopwords
+stop_words=set(stopwords.words("english"))
+filtered_words1=[]
+for w in tokens1:
+    if w not in stop_words:
+        filtered_words1.append(w)
+#print(filtered_words1)
+
+stop_words=set(stopwords.words("english"))
+filtered_words3=[]
+for w in tokens3:
+    if w not in stop_words:
+        filtered_words3.append(w)
+#print(filtered_words3)
+
+stop_words=set(stopwords.words("english"))
+filtered_words3=[]
+for w in tokens3:
+    if w not in stop_words:
+        filtered_words3.append(w)
+#print(filtered_words3)
+
+Parameter - 1
+In articles, thoughts have to be conveyed with a specific number of words - neither too low for incomplete information delivery nor too high for the user to lose interest
+
+fw = [filtered_words1, filtered_words2, filtered_words3, filtered_words4]
+global confidence
+i=0
+for i in range(0,4):
+    if len(fw[i])>=700 and len(fw[i])<750: confidence[i] += 0.2; # 20% confidence
+    elif len(fw[i]) in range(600,700) or len(fw[i]) in range(750,800):
+        confidence[i] += 0.1;
+    print("Total Number of words: ", len(fw[i]))
+    print("Confidence: ", round(confidence[i],2))
+Total Number of words:  3551
+Confidence:  0.0
+Total Number of words:  3567
+Confidence:  0.0
+Total Number of words:  3521
+Confidence:  0.0
+Total Number of words:  3604
+Confidence:  0.0
+
+Parameter - 2
+Repeating certain words are considered to be bad from an editorial point of view as it signifies the poor vocabulary of the writer¶
+
+global confidence
+for x in range(0,4):
+    repeated = [] 
+    for i in range(0, len(fw[x])): 
+        k = i + 1
+        for j in range(k,len(fw[x])): 
+            if fw[x][i] == fw[x][j] and fw[x][i] not in repeated: 
+                repeated.append(fw[x][i]) 
+    print("Number of repeated words: ",len(repeated))
+    if len(repeated)<100: confidence[x]+=0.3
+    elif len(repeated)<105: confidence[x]+=0.2
+    elif len(repeated)<110: confidence[x]+=0.1
+    print("Confidence: ",round(confidence[x],2))
+Number of repeated words:  295
+Confidence:  0.0
+Number of repeated words:  300
+Confidence:  0.0
+Number of repeated words:  298
+Confidence:  0.0
+Number of repeated words:  306
+Confidence:  0.0
+Finding the frequency distribution of words in a certain word length so as to know how many times same word does the author repeat and how many unique words does the author repeat at every instance of 50 words or certain length words - A Diagramatic Representation¶
+
+fd = nltk.FreqDist(tokens1[1900:1950])
+fd.plot()
+
+
+
+
+Out[16]:
+<matplotlib.axes._subplots.AxesSubplot at 0x1579044dac8>
+
+fd = nltk.FreqDist(tokens2[1900:1950])
+fd.plot()
+
+
+Out[17]:
+<matplotlib.axes._subplots.AxesSubplot at 0x15790fa2908>
+
+
+fd = nltk.FreqDist(tokens3[1900:1950])
+fd.plot()
+
+Out[18]:
+<matplotlib.axes._subplots.AxesSubplot at 0x157910a89c8>
+
+
+fd = nltk.FreqDist(tokens4[1900:1950])
+fd.plot()
+
+
+Scraping
+In [2]:
+import nltk
+from urllib import request 
+global url
+global confidence
+url = []
+confidence = []
+
+
+url1 = "http://www.natgeotraveller.in/six-years-and-counting/"
+html1 = request.urlopen(url1).read().decode('utf8')
+#print(html1)
+url.append(url1)
+confidence.append(0.0)
+In [3]:
+url2 = "http://www.natgeotraveller.in/train-to-nowhere/"
+html2 = request.urlopen(url2).read().decode('utf8')
+#print(html2)
+url.append(url2)
+confidence.append(0.0)
+In [4]:
+url3 = "http://www.natgeotraveller.in/what-dreams-may-come/"
+html3 = request.urlopen(url3).read().decode('utf8')
+#print(html3)
+url.append(url3)
+confidence.append(0.0)
+In [5]:
+url4 = "http://www.natgeotraveller.in/getting-saucy-about-food/"
+html4 = request.urlopen(url4).read().decode('utf8')
+#print(html4)
+url.append(url4)
+confidence.append(0.0)
+Tokenization
+In [6]:
+from nltk.tokenize import word_tokenize
+from bs4 import BeautifulSoup
+raw1 = BeautifulSoup(html1, 'html.parser').get_text()
+tokens1 = word_tokenize(raw1)
+print(len(tokens1))
+#print(tokens1)
+3885
+In [7]:
+raw2 = BeautifulSoup(html2, 'html.parser').get_text()
+tokens2 = word_tokenize(raw2)
+print(len(tokens2))
+#print(tokens2)
+3893
+In [8]:
+raw3 = BeautifulSoup(html3, 'html.parser').get_text()
+tokens3 = word_tokenize(raw3)
+print(len(tokens3))
+#print(tokens3)
+3831
+In [9]:
+raw4 = BeautifulSoup(html4, 'html.parser').get_text()
+tokens4 = word_tokenize(raw4)
+print(len(tokens4))
+#print(tokens4)
+3929
+Remove Stopwords
+In [10]:
+from nltk.corpus import stopwords
+stop_words=set(stopwords.words("english"))
+filtered_words1=[]
+for w in tokens1:
+    if w not in stop_words:
+        filtered_words1.append(w)
+#print(filtered_words1)
+In [11]:
+stop_words=set(stopwords.words("english"))
+filtered_words2=[]
+for w in tokens2:
+    if w not in stop_words:
+        filtered_words2.append(w)
+#print(filtered_words2)
+In [12]:
+stop_words=set(stopwords.words("english"))
+filtered_words3=[]
+for w in tokens3:
+    if w not in stop_words:
+        filtered_words3.append(w)
+#print(filtered_words3)
+In [13]:
+stop_words=set(stopwords.words("english"))
+filtered_words4=[]
+for w in tokens4:
+    if w not in stop_words:
+        filtered_words4.append(w)
+#print(filtered_words4)
+Parameter - 1
+In articles, thoughts have to be conveyed with a specific number of words - neither too low for incomplete information delivery nor too high for the user to lose interest
+In [14]:
+fw = [filtered_words1, filtered_words2, filtered_words3, filtered_words4]
+global confidence
+i=0
+for i in range(0,4):
+    if len(fw[i])>=700 and len(fw[i])<750: confidence[i] += 0.2; # 20% confidence
+    elif len(fw[i]) in range(600,700) or len(fw[i]) in range(750,800):
+        confidence[i] += 0.1;
+    print("Total Number of words: ", len(fw[i]))
+    print("Confidence: ", round(confidence[i],2))
+Total Number of words:  3551
+Confidence:  0.0
+Total Number of words:  3567
+Confidence:  0.0
+Total Number of words:  3521
+Confidence:  0.0
+Total Number of words:  3604
+Confidence:  0.0
+Parameter - 2
+Repeating certain words are considered to be bad from an editorial point of view as it signifies the poor vocabulary of the writer
+In [15]:
+global confidence
+for x in range(0,4):
+    repeated = [] 
+    for i in range(0, len(fw[x])): 
+        k = i + 1
+        for j in range(k,len(fw[x])): 
+            if fw[x][i] == fw[x][j] and fw[x][i] not in repeated: 
+                repeated.append(fw[x][i]) 
+    print("Number of repeated words: ",len(repeated))
+    if len(repeated)<100: confidence[x]+=0.3
+    elif len(repeated)<105: confidence[x]+=0.2
+    elif len(repeated)<110: confidence[x]+=0.1
+    print("Confidence: ",round(confidence[x],2))
+Number of repeated words:  295
+Confidence:  0.0
+Number of repeated words:  300
+Confidence:  0.0
+Number of repeated words:  298
+Confidence:  0.0
+Number of repeated words:  306
+Confidence:  0.0
+Finding the frequency distribution of words in a certain word length so as to know how many times same word does the author repeat and how many unique words does the author repeat at every instance of 50 words or certain length words - A Diagramatic Representation
+In [16]:
+fd = nltk.FreqDist(tokens1[1900:1950])
+fd.plot()
+
+Out[16]:
+<matplotlib.axes._subplots.AxesSubplot at 0x1579044dac8>
+In [17]:
+fd = nltk.FreqDist(tokens2[1900:1950])
+fd.plot()
+
+Out[17]:
+<matplotlib.axes._subplots.AxesSubplot at 0x15790fa2908>
+In [18]:
+fd = nltk.FreqDist(tokens3[1900:1950])
+fd.plot()
+
+Out[18]:
+<matplotlib.axes._subplots.AxesSubplot at 0x157910a89c8>
+In [19]:
+fd = nltk.FreqDist(tokens4[1900:1950])
+fd.plot()
+
+Out[19]:
+<matplotlib.axes._subplots.AxesSubplot at 0x1579113e888>
+
+
+
+Parameter 3
+Travel logs are essentially to provide a positive sentiment for the readers
+
+
+# Sentiment Analysis
+
+Parameter 4
+An article can be considered bloated if the number of adjectives are high
+
+from nltk.corpus import wordnet as wn
+global confidence
+for x in range(0,4):
+    adj = [] 
+    for i in range(0, len(fw[x])): 
+        tmp = wn.synsets(fw[x][i])
+        for temp in tmp:
+            c = temp.name().split('.')
+            #print(c)
+            if c[1] == 'a' and fw[x][i] not in adj: 
+                adj.append(fw[x][i]) 
+    print("Number of Adjectives: ",len(adj))
+    diff = len(fw[x])-len(adj)
+    print("Difference: ",diff)
+    if diff<600: confidence[x]+=0.1
+    elif diff<650: confidence[x]+=0.2
+    elif diff<700: confidence[x]+=0.3
+    print("Confidence: ",round(confidence[x],2))
+    print()
+Number of Adjectives:  66
+Difference:  3485
+Confidence:  0.0
+
+Number of Adjectives:  84
+Difference:  3483
+Confidence:  0.0
+
+Number of Adjectives:  78
+Difference:  3443
+Confidence:  0.0
+
+Number of Adjectives:  80
+Difference:  3524
+Confidence:  0.0
+
+Parameter 5
+Number of polysyllables should be within a range where it shouldn't sound complex nor too simple. Here, 4 syllables are set as the parameter¶
+
+# https://stackoverflow.com/questions/405161/detecting-syllables-in-a-word
+
+a4 = [0,0,0,0]
+global confidence
+for x in range(0,4):
+    for i in range(0, len(fw[x])): 
+        theText = fw[x][i]
+        cleanText = ""
+        for ch in theText:
+            if ch in "abcdefghijklmnopqrstuvwxyz'’":
+                cleanText += ch
+            else:
+                cleanText += " "
+
+        asVow    = "aeiouy'’"
+        dExep    = ("ei","ie","ua","ia","eo")
+        theWords = cleanText.lower().split()
+        allSylls = 0
+        for inWord in theWords:
+            nChar  = len(inWord)
+            nSyll  = 0
+            wasVow = False
+            wasY   = False
+            if nChar == 0:
+                continue
+            if inWord[0] in asVow:
+                nSyll += 1
+                wasVow = True
+                wasY   = inWord[0] == "y"
+            for c in range(1,nChar):
+                isVow  = False
+                if inWord[c] in asVow:
+                    nSyll += 1
+                    isVow = True
+                if isVow and wasVow:
+                    nSyll -= 1
+                if isVow and wasY:
+                  nSyll -= 1
+                if inWord[c:c+2] in dExep:
+                    nSyll += 1
+                wasVow = isVow
+                wasY   = inWord[c] == "y"
+            if inWord.endswith(("e")):
+                nSyll -= 1
+            if inWord.endswith(("le","ea","io")):
+                nSyll += 1
+            if nSyll < 1:
+                nSyll = 1
+            # print("%-15s: %d" % (inWord,nSyll))
+            if(nSyll>3): a4[x]+=1
+    print(a4[x])
+68
+61
+76
+73
+
+for x1 in range(0,4):
+    print(a4[x1])
+    if a4[x1] in range(25,35): confidence[x1]+=0.3
+    elif a4[x1] in range(15,25): confidence[x1]+=0.2
+    elif a4[x1] in range(35,45): confidence[x1]+=0.2
+    print("Confidence: ",round(confidence[x1],2))
+68
+Confidence:  0.0
+61
+Confidence:  0.0
+76
+Confidence:  0.0
+73
+Confidence:  0.0
+Parameter 6
+Number of words should be within a range where it shouldn't sound complex nor too simple
+
+# Saurav
+Parameter 7
+Readability index - Check up on this
+In [25]:
+# Idea from: https://medium.com/glose-team/how-to-evaluate-text-readability-with-nlp-9c04bd3f46a2
+# https://www.geeksforgeeks.org/readability-index-pythonnlp/
+Run this for resetting the confidence scores
+In [26]:
+global confidence
+for i in range(len(confidence)):
+    confidence[i]=0
+print(confidence)
+[0, 0, 0, 0]
+Calculating confidences
+All the scores which are cumulated till now are checked against a minimum threshold score
+In [27]:
+global confidence
+for i in range(0,4):
+    if confidence[i]>=0.8:
+        print("Author of article", i+1, "is hired")
+        print("Article ",i+1,":",url[i])
+        
+        In [30]:
+from sklearn.feature_extraction.text import CountVectorizer
+vect=CountVectorizer(binary=True)
+In [ ]:
+task1
+In [32]:
+vect.fit(task1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-32-151e3f6d8f39> in <module>
+----> 1 vect.fit(task1)
+
+NameError: name 'task1' is not defined
+In [33]:
+from sklearn.feature_extraction.text import CountVectorizer
+vect=CountVectorizer(binary=True)
+vect.fit(task1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-33-517e4bd9f11b> in <module>
+      1 from sklearn.feature_extraction.text import CountVectorizer
+      
+      2 vect=CountVectorizer(binary=True)
+----> 3 vect.fit(task1)
+
+NameError: name 'task1' is not defined
+In [36]:
+from sklearn.feature_extraction.text import CountVectorizer
+vect=CountVectorizer(binary=True)
+vect.fit(task2)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-36-c9033986c88e> in <module>
+      1 from sklearn.feature_extraction.text import CountVectorizer
+      2 vect=CountVectorizer(binary=True)
+----> 3 vect.fit(task2)
+
+NameError: name 'task2' is not defined
+In [37]:
+from sklearn.feature_extraction.text import CountVectorizer
+vect=CountVectorizer(binary=True)
+vect.fit(task3)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-37-07b5494f8488> in <module>
+      1 from sklearn.feature_extraction.text import CountVectorizer
+      2 vect=CountVectorizer(binary=True)
+----> 3 vect.fit(task3)
+
+NameError: name 'task3' is not defined
+
+

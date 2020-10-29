@@ -1,0 +1,55 @@
+import spacy
+m = spacy.load('en_core_web_sm')
+sampletext="Biden was raised in Scranton, Pennsylvania, and New Castle County, Delaware. He studied at the University of Delaware before receiving his law degree from Syracuse University.[3] He became a lawyer in 1969 and was elected to the New Castle County Council in 1970. He was elected to the U.S. Senate from Delaware in 1972, becoming the sixth-youngest senator in American history. "
+
+doc=m(sampletext)
+for ent in doc.ents:
+  print(ent.text,ent.label_)
+Scranton GPE
+Pennsylvania GPE
+New Castle County GPE
+Delaware GPE
+the University of Delaware ORG
+Syracuse GPE
+1969 DATE
+the New Castle County Council ORG
+1970 DATE
+the U.S. Senate ORG
+Delaware GPE
+1972 DATE
+sixth ORDINAL
+American NORP
+
+sampletext2="Cultural Heritage is an expression of the ways of living developed by a community and passed on from generation to generation, including customs, practices, places, objects, artistic expressions and values. Cultural Heritage is often expressed as either Intangible or Tangible Cultural Heritage (ICOMOS, 2002)."
+
+doc2=m(sampletext2)
+for ent in doc2.ents:
+  print(ent.text,ent.label_)
+Cultural Heritage ORG
+Cultural Heritage ORG
+ICOMOS ORG
+2002 DATE
+
+text1="Himalaya, is a mountain range in Asia separating the plains of the Indian subcontinent from the Tibetan Plateau. The range has many of Earth's highest peaks, including the highest, Mount Everest, at the border between Nepal and China."
+
+doc1=m(text1)
+for ent in doc1.ents:
+  print(ent.text,ent.label_)
+Himalaya ORG
+Asia LOC
+Indian NORP
+the Tibetan Plateau LOC
+Earth LOC
+Mount Everest LOC
+Nepal GPE
+China GPE
+
+for ent2 in doc2.ents:
+  print(ent2.text,ent2.label)
+17 hours ago 392
+07:54:52 384
+PM 17 hours ago from now 392
+
+
+text2="What time was it 17 hours ago? - The date and time was 10/14/2020 07:54:52 PM 17 hours ago from now."
+doc2=m(text2)

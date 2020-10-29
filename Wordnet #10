@@ -1,0 +1,43 @@
+from nltk.corpus import wordnet
+syns=wordnet.synsets("beautiful")
+In [13]:
+#synsets
+print(syns[0].name)
+<bound method Synset.name of Synset('beautiful.a.01')>
+In [21]:
+#just the word
+print(syns[0].lemmas()[0].name())
+beautiful
+In [11]:
+#definition
+print(syns[0].definition())
+delighting the senses or exciting intellectual or emotional admiration
+In [14]:
+#example
+print(syns[0].examples())
+['a beautiful child', 'beautiful country', 'a beautiful painting', 'a beautiful theory', 'a beautiful party']
+In [19]:
+synonyms=[]
+antonyms=[]
+for syn in wordnet.synsets("honest"):
+    for l in syn.lemmas():
+        synonyms.append(l.name)
+        if l.antonyms():
+            antonyms.append(l.antonyms()[0].name())
+print(set(synonyms))
+print(set(antonyms))
+{<bound method Lemma.name of Lemma('dependable.s.02.true')>, <bound method Lemma.name of Lemma('dependable.s.02.dependable')>, <bound method Lemma.name of Lemma('good.s.19.good')>, <bound method Lemma.name of Lemma('honest.a.01.honorable')>, <bound method Lemma.name of Lemma('honest.a.01.honest')>, <bound method Lemma.name of Lemma('dependable.s.02.reliable')>, <bound method Lemma.name of Lemma('honest.s.07.fair')>}
+{'dishonest'}
+In [22]:
+w1=wordnet.synset("boat.n.01")
+w2=wordnet.synset("ship.n.01")
+print(w1.wup_similarity(w2))
+0.9090909090909091
+In [23]:
+w3=wordnet.synset("cat.n.01")
+w4=wordnet.synset("cat.n.01")
+print(w3.wup_similarity(w4))
+1.0
+
+
+

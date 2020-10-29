@@ -1,0 +1,47 @@
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+ps=PorterStemmer()
+text1="Hey, Hansraj You have been loving programming with cpp but python seems a new language however once you start pythoning you will love pythoned code and amazing things it will bring to you and you will be pythonly"
+words=word_tokenize(text1)
+for w in words:
+    print(ps.stem(w))
+hey
+,
+hansraj
+you
+have
+been
+love
+program
+with
+cpp
+but
+python
+seem
+a
+new
+languag
+howev
+onc
+you
+start
+python
+you
+will
+love
+python
+code
+and
+amaz
+thing
+it
+will
+bring
+to
+you
+and
+you
+will
+be
+pythonli

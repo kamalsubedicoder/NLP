@@ -1,0 +1,250 @@
+import nltk
+nltk.download()
+showing info https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/index.xml
+Out[1]:
+True
+In [ ]:
+import nltk
+nltk.download()
+showing info https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/index.xml
+In [1]:
+import nltk
+ntlk.download()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-1-237b7162dd69> in <module>
+      1 import nltk
+----> 2 ntlk.download()
+
+NameError: name 'ntlk' is not defined
+In [2]:
+import nltk
+nltk.download()
+showing info https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/index.xml
+Out[2]:
+True
+In [3]:
+# task 2- import brown corpus and access data
+Task 2- import brown corpus and access data
+In [5]:
+from nltk.corpus import brown
+#brown.categories()
+brown.words(categories='adventure')[:10]
+Out[5]:
+['Dan',
+ 'Morgan',
+ 'told',
+ 'himself',
+ 'he',
+ 'would',
+ 'forget',
+ 'Ann',
+ 'Turner',
+ '.']
+In [6]:
+brown.categories()
+Out[6]:
+['adventure',
+ 'belles_lettres',
+ 'editorial',
+ 'fiction',
+ 'government',
+ 'hobbies',
+ 'humor',
+ 'learned',
+ 'lore',
+ 'mystery',
+ 'news',
+ 'religion',
+ 'reviews',
+ 'romance',
+ 'science_fiction']
+Task 3 - Import inaugural corpus and access data
+In [7]:
+from nltk.corpus import inaugural
+inaugural.fileids()
+Out[7]:
+['1789-Washington.txt',
+ '1793-Washington.txt',
+ '1797-Adams.txt',
+ '1801-Jefferson.txt',
+ '1805-Jefferson.txt',
+ '1809-Madison.txt',
+ '1813-Madison.txt',
+ '1817-Monroe.txt',
+ '1821-Monroe.txt',
+ '1825-Adams.txt',
+ '1829-Jackson.txt',
+ '1833-Jackson.txt',
+ '1837-VanBuren.txt',
+ '1841-Harrison.txt',
+ '1845-Polk.txt',
+ '1849-Taylor.txt',
+ '1853-Pierce.txt',
+ '1857-Buchanan.txt',
+ '1861-Lincoln.txt',
+ '1865-Lincoln.txt',
+ '1869-Grant.txt',
+ '1873-Grant.txt',
+ '1877-Hayes.txt',
+ '1881-Garfield.txt',
+ '1885-Cleveland.txt',
+ '1889-Harrison.txt',
+ '1893-Cleveland.txt',
+ '1897-McKinley.txt',
+ '1901-McKinley.txt',
+ '1905-Roosevelt.txt',
+ '1909-Taft.txt',
+ '1913-Wilson.txt',
+ '1917-Wilson.txt',
+ '1921-Harding.txt',
+ '1925-Coolidge.txt',
+ '1929-Hoover.txt',
+ '1933-Roosevelt.txt',
+ '1937-Roosevelt.txt',
+ '1941-Roosevelt.txt',
+ '1945-Roosevelt.txt',
+ '1949-Truman.txt',
+ '1953-Eisenhower.txt',
+ '1957-Eisenhower.txt',
+ '1961-Kennedy.txt',
+ '1965-Johnson.txt',
+ '1969-Nixon.txt',
+ '1973-Nixon.txt',
+ '1977-Carter.txt',
+ '1981-Reagan.txt',
+ '1985-Reagan.txt',
+ '1989-Bush.txt',
+ '1993-Clinton.txt',
+ '1997-Clinton.txt',
+ '2001-Bush.txt',
+ '2005-Bush.txt',
+  '2009-Obama.txt',
+ '2013-Obama.txt',
+ '2017-Trump.txt']
+In [8]:
+inaugural.words(fileids='2013-Obama.txt')[:50]
+Out[8]:
+['Thank',
+ 'you',
+ '.',
+ 'Thank',
+ 'you',
+ 'so',
+ 'much',
+ '.',
+ 'Vice',
+ 'President',
+ 'Biden',
+ ',',
+ 'Mr',
+ '.',
+ 'Chief',
+ 'Justice',
+ ',',
+ 'Members',
+ 'of',
+ 'the',
+ 'United',
+ 'States',
+ 'Congress',
+ ',',
+ 'distinguished',
+ 'guests',
+ ',',
+ 'and',
+ 'fellow',
+ 'citizens',
+ ':',
+ 'Each',
+ 'time',
+ 'we',
+ 'gather',
+ 'to',
+ 'inaugurate',
+ 'a',
+ 'President',
+ 'we',
+ 'bear',
+ 'witness',
+ 'to',
+ 'the',
+ 'enduring',
+ 'strength',
+ 'of',
+ 'our',
+ 'Constitution',
+ '.']
+homework: import webtext corpus and access data
+homework: frequency distribution of words in a text¶
+textsample1='Gautam Buddha was the founder of the Buddhism religion. He was born in the ruling house of Kapilvastu, at Lumbini located at the foothills of Nepal in 566 B.C'
+
+fd=nltk.FreqDist(textsample1.split())
+fd
+Out[12]:
+FreqDist({'the': 4, 'of': 3, 'was': 2, 'in': 2, 'at': 2, 'Gautam': 1, 'Buddha': 1, 'founder': 1, 'Buddhism': 1, 'religion.': 1, ...})
+Task 6 Conditional frequency distribution of words in a text
+In [14]:
+from nltk.probability import ConditionalFreqDist
+cfd=ConditionalFreqDist((len(word),word) for word in textsample1.split())
+cfd[4]
+Out[14]:
+FreqDist({'born': 1})
+In [15]:
+cfd[10]
+Out[15]:
+FreqDist({})
+In [16]:
+cfd[8]
+Out[16]:
+FreqDist({'Buddhism': 1})
+In [19]:
+cfd[6]
+cfd[3]
+Out[19]:
+FreqDist({'the': 4, 'was': 2, '566': 1, 'B.C': 1})
+homework to determine frequency distribution and conditional frequency distribution of the President inaugural address
+In [25]:
+sampletext2=inaugural.words(fileids='2013-Obama.txt')
+fd1=nltk.FreqDist(inaugural.words(fileids='2013-Obama.txt'))
+fd1
+Out[25]:
+FreqDist({'the': 100, ',': 99, '.': 91, 'and': 85, 'of': 69, 'our': 69, 'to': 66, 'that': 51, 'we': 46, 'a': 36, ...})
+In [ ]:
+from nltk.probability import ConditionalFreqDist
+cfc=ConditionalFreqDist((len(word),word) for word in sampletext2)
+cfc[5]
+In [4]:
+cfc[3]
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-4-c4f4d3d01cf8> in <module>
+----> 1 cfc[3]
+
+NameError: name 'cfc' is not defined
+In [8]:
+from nltk.probability import ConditionalFreqDist
+
+cfd=ConditionalFreqDist((len(word),word)for word in inaugural.words(fileids= '2013-Obama.txt'))
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-8-c8c5ba028e24> in <module>
+      1 from nltk.probability import ConditionalFreqDist
+      2 
+----> 3 cfd=ConditionalFreqDist((len(word),word)for word in inaugural.words(fileids= '2013-Obama.txt'))
+
+NameError: name 'inaugural' is not defined
+In [ ]:
+
+In [9]:
+from nltk.probability import ConditionalFreqDist
+
+cfd=ConditionalFreqDist((len(word),word)for word in inaugural.words(fileids= '2013-Obama.txt'))
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-9-c8c5ba028e24> in <module>
+      1 from nltk.probability import ConditionalFreqDist
+      2 
+----> 3 cfd=ConditionalFreqDist((len(word),word)for word in inaugural.words(fileids= '2013-Obama.txt'))
+
+NameError: name 'inaugural' is not defined

@@ -1,0 +1,80 @@
+In [1]:
+#task 2 simple text classification
+def gender_features(word):
+    return {'last_letter':word[-1]}
+In [2]:
+gender_features('Obama')
+Out[2]:
+{'last_letter': 'a'}
+In [5]:
+from nltk.corpus import names
+#names.words()
+print(len(names.words()))
+7944
+In [6]:
+labeled_names=([(name,'male')for name in names.words('male.txt')]+[(name,'female') for name in names.words('female.txt')])
+In [7]:
+import random
+random.shuffle(labeled_names)
+In [8]:
+featuresets=[(gender_features(n),gender) for (n,gender) in labeled_names]
+In [10]:
+train_set,test_set=featuresets[:5000],featuresets[5000:]
+In [11]:
+import nltk
+classifier=nltk.NaiveBayesClassifier.train(train_set)
+In [12]:
+classifier.classify(gender_features('David'))
+Out[12]:
+'male'
+In [13]:
+classifier.classify(gender_features('Hansraj'))
+Out[13]:
+'male'
+In [15]:
+classifier.classify(gender_features('Rouniyar'))
+Out[15]:
+'male'
+In [16]:
+classifier.classify(gender_features('Nisha'))
+Out[16]:
+'female'
+In [17]:
+classifier.classify(gender_features('Modi'))
+Out[17]:
+'female'
+In [18]:
+print(nltk.classify.accuracy(classifier,test_set))
+0.764266304347826
+In [19]:
+#task 3 count vectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+vect=CountVectorizer(binary=True)
+In [20]:
+corpus=["Tessaract is good optical character recognition engine  ", "optical character recognition is significant "]
+In [21]:
+vect.fit(corpus)
+Out[21]:
+CountVectorizer(analyzer='word', binary=True, decode_error='strict',
+                dtype=<class 'numpy.int64'>, encoding='utf-8', input='content',
+                lowercase=True, max_df=1.0, max_features=None, min_df=1,
+                ngram_range=(1, 1), preprocessor=None, stop_words=None,
+                strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
+                tokenizer=None, vocabulary=None)
+In [22]:
+vocab=vect.vocabulary_
+In [24]:
+for key in sorted(vocab.keys()):
+    print("{}:{}".format(key,vocab[key]))
+character:0
+engine:1
+good:2
+is:3
+optical:4
+recognition:5
+significant:6
+tessaract:7
+In [25]:
+print(vect.transform(["This is a good optical illusion"]).toarray())
+[[0 0 1 1 1 0 0 0]]
+In [ ]:

@@ -1,0 +1,108 @@
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize
+In [10]:
+sentence= [("the", "DT"), ("little", "JJ"), ("yellow", "JJ"),("dog", "NN"), ("barked", "VBD"), ("at", "IN"),  ("the", "DT"), ("cat", "NN")]
+grammar="NP: {<DT>?<JJ>*<NN>}"
+#productions from CFG for NP and VP
+c=nltk.RegexpParser(grammar)
+result=c.parse(sentence)
+print(result)
+(S
+  (NP the/DT little/JJ yellow/JJ dog/NN)
+  barked/VBD
+  at/IN
+  (NP the/DT cat/NN))
+In [11]:
+result.draw()
+In [13]:
+lincolns="Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live."
+nltk_tokens=nltk.word_tokenize(lincolns)
+tokens_speech=nltk.pos_tag(nltk_tokens)
+nouns="NP: {<DT>?<JJ>*<NN>}"
+In [18]:
+d=nltk.RegexpParser(nouns)
+nextresult=d.parse(tokens_speech)
+print(nextresult)
+(S
+  Four/CD(NP score/NN)
+  and/CC
+  seven/CD
+  years/NNS
+  ago/RB
+  our/PRP$
+  fathers/NNS
+  brought/VBN
+  forth/RB
+  on/IN
+  (NP this/DT continent/NN)
+  ,/,
+  (NP a/DT new/JJ nation/NN)
+  ,/,
+  conceived/VBN
+  in/IN
+  Liberty/NNP
+  ,/,
+  and/CC
+  dedicated/VBD
+  to/TO
+  (NP the/DT proposition/NN)
+  that/IN
+  all/DT
+  men/NNS
+  are/VBP
+  created/VBN
+  equal.Now/IN
+  we/PRP
+  are/VBP
+  engaged/VBN
+  in/IN
+  (NP a/DT great/JJ civil/JJ war/NN)
+  ,/,testing/VBG
+  whether/IN
+  (NP that/DT nation/NN)
+  ,/,
+  or/CC
+  (NP any/DT nation/NN)
+  so/RB
+  conceived/JJ
+  and/CC
+  so/RB
+  dedicated/JJ
+  ,/,
+  can/MD
+  long/VB
+  (NP endure/NN)
+  ./.
+  We/PRP
+  are/VBP
+  met/VBN
+  on/IN
+  (NP a/DT great/JJ battle-field/NN)
+  of/IN
+  (NP that/DT war/NN)
+  ./.
+  We/PRP
+  have/VBP
+  come/VBN
+  to/TO
+  dedicate/VB
+  (NP a/DT portion/NN)
+  of/IN
+  (NP that/DT field/NN)
+  ,/,
+  as/IN
+  (NP a/DT final/JJ resting/NN)
+  (NP place/NN)
+  for/IN
+  those/DT
+  who/WP here/RB
+  gave/VBD
+  their/PRP$
+  lives/NNS
+  that/IN
+  (NP that/DT nation/NN)
+  might/MD
+  live/VB
+  ./.)
+In [ ]:
+nextresult.draw()

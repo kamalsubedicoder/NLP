@@ -5,14 +5,14 @@ stop_words=set(stopwords.words("english"))
 print(stop_words)
 {'again', "haven't", 'weren', 'down', 'do', "shouldn't", 'whom', "won't", 'just', 'about', 'few', 'are', 'how', 'these', 'wasn', 'been', "isn't", 'will', 'other', 'what', 'because', 'once', 'doing', "couldn't", 'mightn', 'then', 'some', 'there', 'out', 'between', "you'll", 'with', 'was', 'yourselves', 'from', 'i', 'against', 'aren', 'in', 'only', 'yourself', 're', 'they', 'shouldn', 'them', 'if', 'were', 'have', 'no', "wouldn't", 'to', 'themselves', 'that', 'did', "needn't", 'where', 'the', 'him', 'for', 'on', 'or', 'those', 'ours', 'couldn', 'being', 'further', 'too', 'their', 'having', "should've", 'll', "that'll", 'but', 'is', 'am', 'which', "don't", 'most', 'ma', 'all', 'our', 'hers', 'hadn', 'above', 'now', 'after', 'd', 'an', 'both', 'who', "mustn't", 'be', "wasn't", "mightn't", 'you', 'such', 'm', "aren't", 'it', 'should', 'by', 'through', 'needn', "weren't", 'theirs', 'herself', 'don', 'didn', 'himself', 'under', 'while', 'until', 'each', "didn't", "you're", 'into', "doesn't", 'he', 'had', 'before', 'over', "you'd", 'me', 'not', 'off', 'hasn', 'his', 'yours', 'at', 'same', "hasn't", 'own', 'than', 'myself', 'itself', 'y', "you've", 'she', 'a', 'nor', 'as', 'this', 'so', "she's", 'of', 'won', 'up', 've', 'your', 'more', 'doesn', 'isn', 'when', 'why', 't', 'its', 'has', 'o', 'mustn', "it's", 'during', 'here', 'any', "shan't", 'ourselves', 'ain', 'shan', 'wouldn', 'below', 'her', "hadn't", 'very', 'haven', 'my', 'does', 'and', 's', 'can', 'we'}
 In [5]:
-example_sentence="While you are off home, Hansraj watches a lot of anime"
+example_sentence="While you are off home, kamal watches a lot of movie"
 words=word_tokenize(example_sentence)
 print(words)
-['While', 'you', 'are', 'off', 'home', ',', 'Hansraj', 'watches', 'a', 'lot', 'of', 'anime']
+['While', 'you', 'are', 'off', 'home', ',', 'kamal', 'watches', 'a', 'lot', 'of', 'anime']
 In [6]:
 filtered_words=[]
 for w in words:
     if w not in stop_words:
         filtered_words.append(w)
 print(filtered_words)
-['While', 'home', ',', 'Hansraj', 'watches', 'lot', 'anime']
+['While', 'home', ',', 'kamal', 'watches', 'lot', 'anime']

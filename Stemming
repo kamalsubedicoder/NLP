@@ -2,11 +2,11 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
 
 ps=PorterStemmer()
-text1="hello, kamal You have been loving programming with cpp but python seems a new language however once you start pythoning you will love pythoned code and amazing things it will bring to you and you will be pythonly"
+text1="Hello, kamal You have been loving programming with cpp but python seems a new language however once you start pythoning you will love pythoned code and amazing things it will bring to you and you will be pythonly"
 words=word_tokenize(text1)
 for w in words:
     print(ps.stem(w))
-hello
+Hello
 ,
 kamal
 you
